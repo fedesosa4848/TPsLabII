@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1692036820 source:c:\tps lab ii\ej3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"time.h"
+

@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1697808568 source:c:\tps lab ii\arreglodearboles\libreriaarbolesbin.c
+	"libreriaArbolesBin.h"
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	"libreriaArbolesBin.h"
+	<string.h>
+
+1697808568 c:\tps lab ii\arreglodearboles\libreriaarbolesbin.h
+
+1698461284 source:c:\tps lab ii\arreglodearboles\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LibreriaArregloDeArboles.h"
+
+1698429000 c:\tps lab ii\arreglodearboles\libreriaarreglodearboles.h
+
+1698461255 source:c:\tps lab ii\arreglodearboles\libreriaarreglodearboles.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LibreriaArregloDeArboles.h"
+

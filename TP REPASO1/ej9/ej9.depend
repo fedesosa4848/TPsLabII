@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1692114532 source:c:\tps lab ii\ej9\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

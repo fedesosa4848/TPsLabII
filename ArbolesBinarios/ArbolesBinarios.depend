@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1697038768 source:c:\tps lab ii\arbolesbinarios\main.c
+	<stdio.h>
+	<stdlib.h>
+

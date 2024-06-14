@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1692657931 source:c:\tps lab ii\tp repaso 2\ej8\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<string.h>
+

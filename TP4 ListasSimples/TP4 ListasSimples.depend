@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1695942764 source:c:\tps lab ii\tp4 listassimples\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"time.h"
+	"libreriaTp4.h"
+
+1695942887 source:c:\tps lab ii\tp4 listassimples\libreriatp4.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"time.h"
+	"libreriaTp4.h"
+
+1695942166 c:\tps lab ii\tp4 listassimples\libreriatp4.h
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1692035298 source:c:\tps lab ii\ej2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

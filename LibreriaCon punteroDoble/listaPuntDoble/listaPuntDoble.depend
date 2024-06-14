@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1696085232 source:c:\tps lab ii\libreriacon punterodoble\listapuntdoble\main.c
+	<stdio.h>
+	<stdlib.h>
+	"libreriaDoble.h"
+
+1696085241 c:\tps lab ii\libreriacon punterodoble\listapuntdoble\libreriadoble.h
+
+1696086160 source:c:\tps lab ii\libreriacon punterodoble\listapuntdoble\libreriadoble.c
+	<stdio.h>
+	<stdlib.h>
+	"libreriaDoble.h"
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1693937840 source:c:\tps lab ii\tp repaso1\recursividad( ejemplo factorial )\main.c
+	<stdio.h>
+	<stdlib.h>
+	"time.h"
+

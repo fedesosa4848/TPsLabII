@@ -1,0 +1,20 @@
+git init crea repositorio , espacio de trabajo
+
+git pull extraer y descargar contenido desde un repositorio remoto y actualizar al instante el repositorio local para reflejar ese contenido
+
+git status , para ver cambios
+
+git branch crea la rama.
+git log --online me muestra las ramas
+git checkout "nombredelarama" , se posiciona en la rama
+
+git add . permite subir cambios a la rama
+git commit -m  "mensaje"
+
+git merge "nombredelarama" , manda los cambios a la rama donde yo este posicionado
+
+git push para guardar
+
+
+
+

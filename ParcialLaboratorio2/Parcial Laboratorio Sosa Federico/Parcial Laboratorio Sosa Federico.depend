@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1702059545 source:c:\tps lab ii\parciallaboratorio2\parcial laboratorio sosa federico\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

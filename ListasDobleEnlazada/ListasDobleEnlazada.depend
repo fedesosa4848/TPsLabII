@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1695219913 source:c:\tps lab ii\listasdobleenlazada\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ListasDobleEnlazadaLib.h"
+
+1695998084 c:\tps lab ii\listasdobleenlazada\listasdobleenlazadalib.h
+
+1695998086 source:c:\tps lab ii\listasdobleenlazada\listasdobleenlazadalib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ListasDobleEnlazadaLib.h"
+

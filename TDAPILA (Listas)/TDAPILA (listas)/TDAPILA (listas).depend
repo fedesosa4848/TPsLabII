@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1694615693 source:c:\tps lab ii\tdapila (listas)\tdapila (listas)\libreriatp4.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"time.h"
+	"libreriaTp4.h"
+
+1694615693 c:\tps lab ii\tdapila (listas)\tdapila (listas)\libreriatp4.h
+
+1694780517 source:c:\tps lab ii\tdapila (listas)\tdapila (listas)\main.c
+	<stdio.h>
+	<stdlib.h>
+	"TDAPilaListaSimp.h"
+
+1694780596 c:\tps lab ii\tdapila (listas)\tdapila (listas)\tdapilalistasimp.h
+
+1694780670 source:c:\tps lab ii\tdapila (listas)\tdapila (listas)\tdapilalistasimp.c
+	<stdio.h>
+	<stdlib.h>
+	"TDAPilaListaSimp.h"
+

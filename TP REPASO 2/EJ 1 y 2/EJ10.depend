@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1692115680 source:c:\tps lab ii\ej10\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1692970342 source:c:\tps lab ii\tp repaso 2\ej 1 y 2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

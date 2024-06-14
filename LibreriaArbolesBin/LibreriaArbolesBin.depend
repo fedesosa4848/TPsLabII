@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1697078290 source:c:\tps lab ii\libreriaarbolesbin\listasdobleenlazadalib.c
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<string.h>
+	"ListasDobleEnlazadaLib.h"
+
+1695998084 c:\tps lab ii\libreriaarbolesbin\listasdobleenlazadalib.h
+
+1697808568 source:c:\tps lab ii\libreriaarbolesbin\main.c
+	<stdio.h>
+	<stdlib.h>
+	"libreriaArbolesBin.h"
+	<string.h>
+
+1697808568 c:\tps lab ii\libreriaarbolesbin\libreriaarbolesbin.h
+
+1697808568 source:c:\tps lab ii\libreriaarbolesbin\libreriaarbolesbin.c
+	"libreriaArbolesBin.h"
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	"libreriaArbolesBin.h"
+	<string.h>
+

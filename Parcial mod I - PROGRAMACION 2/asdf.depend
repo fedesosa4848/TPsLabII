@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1696092542 source:c:\users\win10\desktop\asdf\main.c
+	<stdio.h>
+	<stdlib.h>
+

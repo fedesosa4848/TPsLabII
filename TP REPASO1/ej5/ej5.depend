@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1692049173 source:c:\tps lab ii\ej5\main.c
+	<stdio.h>
+	<stdlib.h>
+	"time.h"
+
+1692198280 source:c:\tps lab ii\tp repaso1\ej5\main.c
+	<stdio.h>
+	<stdlib.h>
+	"time.h"
+
