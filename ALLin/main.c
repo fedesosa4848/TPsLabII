@@ -748,7 +748,7 @@ typedef struct {
 } registroArchivo;
 
 typedef struct {
-      char nombreAnimal [30];
+    char nombreAnimal [30];
 	int cantidad;
 	int habitat;
 // 1 - selva, 2- savana, 3-bosque, 4-mar
@@ -1264,27 +1264,332 @@ void agregarLibroAListaYArchivo(listaGeneros *lista, const char *nombreArchivo) 
 
 //Lista de listas
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Estructuras para listas
 typedef struct {
-    int legajo
-    int nota
-    char materia[20];
-    char nombre [20]
-}stalumno;
+    int cantCopias;
+    float precioAlquiler;
+} stcopias;
 
-typedef struct nodoAlumno{
-  stAlumno dato;
-  struct nodoAlumno * siguiente;
-}nodoAlumno;
+typedef struct {
+    char titulo[20];
+    char autor[20];
+    int cantPag;
+    char genero[20];
+    int anioLanzamiento;
+    int idInterno;
+    stcopias Copias;
+} stlibros;
 
-typedef struct nodoMateria{
- char materia [20]
- nodoAlumno * primero;
- struct nodoMateria * siguiente;
-}nodoMateria;
+typedef struct nodoLibro {
+    stlibros dato;
+    struct nodoLibro *siguiente;
+} nodoLibro;
 
-typedef struct listaMaterias{
-   nodoMateria * primero;
-}listaMaterias;
+typedef struct nodoGenero {
+    char genero[20];
+    nodoLibro *listaDeLibros;
+    struct nodoGenero *siguiente;
+} nodoGenero;
+
+typedef struct listaGeneros {
+    nodoGenero *primero;
+} listaGeneros;
+
+// Inicializar lista de géneros
+listaGeneros *inicializarListaGeneros() {
+    listaGeneros *nuevaLista = (listaGeneros *)malloc(sizeof(listaGeneros));
+    if (nuevaLista != NULL) {
+        nuevaLista->primero = NULL;
+    } else {
+        printf("Error al asignar memoria para la lista de géneros.\n");
+    }
+    return nuevaLista;
+}
+
+// Crear un nuevo nodo libro
+nodoLibro *crearNodoLibro(stlibros libro) {
+    nodoLibro *nuevo = (nodoLibro *)malloc(sizeof(nodoLibro));
+    if (nuevo != NULL) {
+        nuevo->dato = libro;
+        nuevo->siguiente = NULL;
+    } else {
+        printf("Error al asignar memoria para el nodo libro.\n");
+    }
+    return nuevo;
+}
+
+// Agregar un género a la lista de géneros
+void agregarGenero(listaGeneros *lista, const char genero[]) {
+    nodoGenero *nuevoGenero = (nodoGenero *)malloc(sizeof(nodoGenero));
+    if (nuevoGenero != NULL) {
+        strcpy(nuevoGenero->genero, genero);
+        nuevoGenero->listaDeLibros = NULL;
+        nuevoGenero->siguiente = lista->primero;
+        lista->primero = nuevoGenero;
+    } else {
+        printf("Error al asignar memoria para el nodo género.\n");
+    }
+}
+
+// Buscar un género en la lista de géneros
+nodoGenero *buscarGenero(listaGeneros *lista, const char genero[]) {
+    nodoGenero *actual = lista->primero;
+    while (actual != NULL) {
+        if (strcmp(actual->genero, genero) == 0) {
+            return actual;
+        }
+        actual = actual->siguiente;
+    }
+    return NULL; // Género no encontrado
+}
+
+// Agregar un libro a la lista de libros de un género
+void agregarLibroAGenero(nodoGenero *genero, stlibros libro) {
+    nodoLibro *nuevoLibro = crearNodoLibro(libro);
+    if (nuevoLibro != NULL) {
+        nuevoLibro->siguiente = genero->listaDeLibros;
+        genero->listaDeLibros = nuevoLibro;
+    }
+}
+
+// Crear un libro
+stlibros crearLibro(char nombreLibro[]) {
+    stlibros libro;
+
+    strcpy(libro.titulo, nombreLibro);
+
+    printf("Ingrese el autor del libro: ");
+    fflush(stdin);
+    gets(libro.autor);
+
+    printf("Ingrese la cantidad de páginas: ");
+    scanf("%d", &libro.cantPag);
+
+    printf("Ingrese el género del libro: ");
+    fflush(stdin);
+    gets(libro.genero);
+
+    printf("Ingrese el año de lanzamiento: ");
+    scanf("%d", &libro.anioLanzamiento);
+
+    printf("Ingrese el ID interno del libro: ");
+    scanf("%d", &libro.idInterno);
+
+    printf("Ingrese la cantidad de copias: ");
+    scanf("%d", &libro.Copias.cantCopias);
+
+    printf("Ingrese el precio de alquiler por copia: ");
+    scanf("%f", &libro.Copias.precioAlquiler);
+
+    return libro;
+}
+
+// Verificar si un libro ya existe en el archivo
+int libroExisteEnArchivo(const char *nombreLibro, const char *archivo) {
+    FILE *file = fopen(archivo, "rb");
+    if (file == NULL) {
+        return 0; // El archivo no está disponible
+    }
+
+    stlibros libro;
+
+    while (fread(&libro, sizeof(stlibros), 1, file) == 1) {
+        if (strcmp(libro.titulo, nombreLibro) == 0) {
+            fclose(file);
+            return 1; // El libro existe en el archivo
+        }
+    }
+
+    fclose(file);
+    return 0; // No se encontró el libro en el archivo
+}
+
+// Cargar un libro en el archivo
+void cargarLibroEnArchivo(const char *archivo) {
+    char continuar = 's';
+
+    while (continuar == 's' || continuar == 'S') {
+        stlibros libro;
+        FILE *file = fopen(archivo, "ab");
+
+        if (file == NULL) {
+            printf("Error al abrir el archivo de libros.\n");
+            return;
+        }
+
+        printf("Ingrese el título del libro: ");
+        fflush(stdin);
+        gets(libro.titulo);
+
+        if (libroExisteEnArchivo(libro.titulo, archivo)) {
+            printf("El libro ya existe en el archivo. No se puede cargar nuevamente.\n");
+            fclose(file);
+        } else {
+            libro = crearLibro(libro.titulo);
+
+            fwrite(&libro, sizeof(stlibros), 1, file);
+            fclose(file);
+
+            printf("¿Desea cargar otro libro? (S/N): ");
+            fflush(stdin);
+            scanf(" %c", &continuar);
+        }
+    }
+}
+
+// Cargar lista de géneros desde archivo
+listaGeneros *cargarListaDeGenerosDesdeArchivo(const char *nombreArchivo, listaGeneros *listaGeneros) {
+    FILE *archivo = fopen(nombreArchivo, "rb");
+    if (archivo == NULL) {
+        printf("No se pudo abrir el archivo de libros.\n");
+        return listaGeneros; // Devolver la lista original
+    }
+
+    stlibros libro;
+
+    while (fread(&libro, sizeof(stlibros), 1, archivo) == 1) {
+        nodoGenero *genero = buscarGenero(listaGeneros, libro.genero);
+        if (genero == NULL) {
+            // Si el género no existe en la lista, agrégalo
+            agregarGenero(listaGeneros, libro.genero);
+            genero = listaGeneros->primero;
+        }
+
+        // Agregar el libro a la lista del género correspondiente
+        agregarLibroAGenero(genero, libro);
+    }
+
+    fclose(archivo);
+
+    return listaGeneros; // Devolver la lista modificada
+}
+
+// Mostrar el archivo de libros
+void mostrarArchivoDeLibros(const char *archivo) {
+    FILE *file = fopen(archivo, "rb");
+
+    if (file == NULL) {
+        printf("No se pudo abrir el archivo de libros.\n");
+        return;
+    }
+
+    stlibros libro;
+
+    printf("Libros en el archivo:\n");
+
+    while (fread(&libro, sizeof(stlibros), 1, file) == 1) {
+        printf("Título: %s\n", libro.titulo);
+        printf("Autor: %s\n", libro.autor);
+        printf("Cantidad de páginas: %d\n", libro.cantPag);
+        printf("Género: %s\n", libro.genero);
+        printf("Año de lanzamiento: %d\n", libro.anioLanzamiento);
+        printf("ID interno: %d\n", libro.idInterno);
+        printf("Cantidad de copias: %d\n", libro.Copias.cantCopias);
+        printf("Precio de alquiler por copia: %.2f\n", libro.Copias.precioAlquiler);
+        printf("\n");
+    }
+
+    fclose(file);
+}
+
+// Recorrer lista de géneros y mostrar libros
+void recorrerListaDeGeneros(listaGeneros *lista) {
+    nodoGenero *actual = lista->primero;
+
+    while (actual != NULL) {
+        printf("Género: %s\n", actual->genero);
+        printf("Libros en este género:\n");
+
+        nodoLibro *libroActual = actual->listaDeLibros;
+        while (libroActual != NULL) {
+            printf("ID: %d - Título: %s - Autor: %s\n", libroActual->dato.idInterno, libroActual->dato.titulo, libroActual->dato.autor);
+            libroActual = libroActual->siguiente;
+        }
+
+        printf("\n");
+
+        actual = actual->siguiente;
+    }
+}
+
+// Agregar libro a lista y archivo
+void agregarLibroAListaYArchivo(listaGeneros *lista, const char *nombreArchivo) {
+    char nombreLibro[20];
+    char genero[20];
+
+    printf("Ingrese el título del libro: ");
+    fflush(stdin);
+    gets(nombreLibro);
+
+    // Buscar si el libro ya existe en la lista
+    nodoGenero *generoActual = lista->primero;
+    while (generoActual != NULL) {
+        nodoLibro *libroActual = generoActual->listaDeLibros;
+        while (libroActual != NULL) {
+            if (strcmp(libroActual->dato.titulo, nombreLibro) == 0) {
+                printf("El libro ya existe en la lista.\n");
+                return;
+            }
+            libroActual = libroActual->siguiente;
+        }
+        generoActual = generoActual->siguiente;
+    }
+
+    printf("Ingrese el género del libro: ");
+    fflush(stdin);
+    gets(genero);
+
+    stlibros libroAGuardar = crearLibro(nombreLibro);
+    nodoLibro *nuevoNodo = crearNodoLibro(libroAGuardar);
+
+    // Buscar el género en la lista
+    nodoGenero *generoEncontrado = buscarGenero(lista, genero);
+
+    if (generoEncontrado == NULL) {
+        // Si el género no existe en la lista, agrégalo
+        agregarGenero(lista, genero);
+        generoEncontrado = lista->primero;
+    }
+
+    // Insertar el libro en la lista correspondiente al género
+    agregarLibroAGenero(generoEncontrado, libroAGuardar);
+
+    FILE *archivo = fopen(nombreArchivo, "ab");
+    if (archivo == NULL) {
+        printf("No se pudo abrir el archivo para escritura.\n");
+        free(nuevoNodo); // Liberar memoria si no se pudo abrir el archivo
+        return;
+    }
+
+    fwrite(&libroAGuardar, sizeof(libroAGuardar), 1, archivo); // Guardar en el archivo
+    fclose(archivo);
+
+    printf("Libro guardado en la lista y en el archivo.\n");
+}
+
+// Programa principal para demostrar las funciones
+int main() {
+    listaGeneros *miLista = inicializarListaGeneros();
+
+    // Cargar libros desde archivo
+    cargarListaDeGenerosDesdeArchivo("libros.dat", miLista);
+
+    // Agregar un libro nuevo a la lista y al archivo
+    agregarLibroAListaYArchivo(miLista, "libros.dat");
+
+    // Mostrar los libros desde el archivo
+    mostrarArchivoDeLibros("libros.dat");
+
+    // Recorrer la lista de géneros y mostrar los libros
+    recorrerListaDeGeneros(miLista);
+
+    return 0;
+}
+
 
 //TDA Fila
 
